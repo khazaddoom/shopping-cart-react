@@ -16,3 +16,24 @@
     color: black;
     font-style: italic;
 }
+
+.cart {
+    display: flex;
+    align-items: center;
+}
+
+.cart span {
+    margin-right: 5px
+}
+
+.cart__tooltip {
+    height: 5px;
+    width: 5px;
+    background-color: red;
+    border-radius: 50%
+}
+
+.cart__img {
+    height: 35px;
+    width: 35px;
+}

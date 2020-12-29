@@ -4,7 +4,7 @@ import Header from './Header'
 function WithHeader(props) {
     return (
         <>
-            <Header />
+            <Header cartQuantity={1}/>
             { props.children }
         </>
 
