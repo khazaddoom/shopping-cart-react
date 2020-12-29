@@ -1,0 +1,18 @@
+.nav-container {
+    background-color: rgb(231, 117, 9);
+    padding: 1rem 0;
+    display: flex;
+    justify-content: flex-end;
+}
+.nav-elements {
+    display: flex;
+}
+
+.link {
+    color: white;
+}
+
+.link:hover {
+    color: black;
+    font-style: italic;
+}

@@ -1,24 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import ProductList from './components/ProductList';
+import Cart from './components/Cart'
+import WithHeader from './components/WithHeader';
+import NoMatch from './components/NoMatch';
+
+const data = [{
+  title: 'ADIDAS', shortDescription: 'Awesome Shoes in Store', imageUrl: '', unitPrice: 12, currencyCode: "$"
+}, {
+  title: 'ADIDAS', shortDescription: 'Awesome Shoes in Store', imageUrl: '', unitPrice: 12, currencyCode: "$"
+},{
+  title: 'ADIDAS', shortDescription: 'Awesome Shoes in Store', imageUrl: '', unitPrice: 12, currencyCode: "$"
+},{
+  title: 'ADIDAS', shortDescription: 'Awesome Shoes in Store', imageUrl: '', unitPrice: 12, currencyCode: "$"
+},]
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Redirect to="/products" />
+        </Route>
+        <Route path="/products">
+          <WithHeader>
+            <ProductList products={data}/>
+          </WithHeader>
+        </Route>
+        <Route path="/cart">
+          <WithHeader>
+            <Cart />
+          </WithHeader>
+        </Route>
+        <Route>
+          <WithHeader>
+            <NoMatch />
+          </WithHeader>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
