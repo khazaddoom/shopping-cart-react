@@ -4,11 +4,12 @@ import './ProductList.css'
 
 let id = 1
 
-function ProductList({products}) {
+const ProductList = ({products, handleAddToCart}) => {
+
     return (
         <div className="grid">
             {
-                products.map(({title, shortDescription, imageUrl, unitPrice, currencyCode})=> (<Product key={id++} title={title} shortDescription={shortDescription} currencyCode={currencyCode} unitPrice={unitPrice}/>))
+                products.map((product)=> (<Product key={id++} {...product} handleAddToCart={handleAddToCart}/>))
             }
             
         </div>

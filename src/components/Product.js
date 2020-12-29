@@ -1,7 +1,7 @@
 import React from 'react'
 import './Product.css'
 
-function Product({title, shortDescription, imageUrl, unitPrice, currencyCode}) {
+const Product = ({id, title, shortDescription, imageUrl, unitPrice, currencyCode, handleAddToCart}) => {
     return (
         <div className="card-producto">
             <h1>{title}</h1>
@@ -11,7 +11,7 @@ function Product({title, shortDescription, imageUrl, unitPrice, currencyCode}) {
             </div>
             <div className="info-producto">
                 <div className="price-producto">{currencyCode + unitPrice}</div>
-                <a href="#" className="button-producto">Add to Cart</a>
+                <a href="" className="button-producto" onClick={e => e.preventDefault() || handleAddToCart(id)}>Add to Cart</a>
             </div>
         </div>
     )
