@@ -21,7 +21,14 @@ const data = [{ id: 101,
 const App = () => {
   const [cartData, setcartData] = useState([])
   const handleAddToCart = (id) => {
-    setcartData([...cartData, data.find(prod => prod.id == id)])
+    let found = cartData.find(prod => prod.cart_item_id == id)
+    if(found) {
+      found.qty++
+      cartData[cartData.indexOf(found)] = found
+      setcartData(cartData)
+    }else {
+      setcartData([...cartData, {cart_item_id: id, qty: 1}])
+    } 
   }
 
   return (
@@ -37,7 +44,7 @@ const App = () => {
         </Route>
         <Route path="/cart">
           <WithHeader cartQuantity={cartData.length}>
-            <Cart />
+            <Cart cartItems={cartData}/>
           </WithHeader>
         </Route>
         <Route>
