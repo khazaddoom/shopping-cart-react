@@ -39,7 +39,7 @@ const App = () => {
         </Route>
         <Route path="/products">
           <WithHeader cartQuantity={cartData.length}>
-            <ProductList products={data} handleAddToCart={handleAddToCart}/>
+            <ProductList products={data} cartItems={cartData} handleAddToCart={handleAddToCart}/>
           </WithHeader>
         </Route>
         <Route path="/cart">
