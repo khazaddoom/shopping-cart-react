@@ -12,9 +12,8 @@ function Header({cartQuantity}) {
                         <div className="cart">
                             <div style={{position: 'relative'}}>
                                 <img className="cart__img" src={process.env.PUBLIC_URL + '/assets/images/cart.png'} alt="shopping cart" />
-                                <span className="cart__tooltip">{cartQuantity}</span>
+                                {cartQuantity>0? <span className="cart__tooltip">{cartQuantity}</span>: ''}
                             </div>
-                            <span>Cart</span>
                         </div>
                     </Link>
                 </li>

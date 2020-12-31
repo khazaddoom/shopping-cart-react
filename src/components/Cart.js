@@ -6,18 +6,18 @@ let id = 1
 
 function Cart({cartItems, handleAddToCart, handleRemoveFromCart}) {
 
-    const [state, setstate] = useState(cartItems)
+    const [itemsInCart, setItemsInCart] = useState(cartItems)
 
     return (
-        <div className="cart-container">
-            <section className="single-item-grid">
-            { state.map(product => (<Product key={id++} {...product} handleRemoveFromCart={handleRemoveFromCart} handleAddToCart={handleAddToCart}/>))}
-            </section>
-            <section className="summary-card">
-                <h3>Summary</h3>
-                <Summary cartItems={state} />
-            </section>
-        </div>
+        itemsInCart.length>0? <div className="cart-container">
+        <section className="single-item-grid">
+        { itemsInCart.map(product => (<Product key={id++} {...product} handleRemoveFromCart={handleRemoveFromCart} handleAddToCart={handleAddToCart}/>))}
+        </section>
+        <section className="summary-card">
+            <h3>Summary</h3>
+            <Summary cartItems={itemsInCart} />
+        </section>
+    </div> : <h1>There is nothing to show here!</h1>
     )
 }
 

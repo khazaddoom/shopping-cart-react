@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import './Summary.css'
 
 function Summary({cartItems}) {
-    console.log('rendering')
+
     const [items, setItems] = useState(cartItems)
     return (
         <ul>

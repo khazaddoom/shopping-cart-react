@@ -22,10 +22,6 @@
     align-items: center;
 }
 
-.cart span {
-    margin-right: 5px
-}
-
 .cart__tooltip {
     height: 20px;
     width: 20px;
