@@ -10,7 +10,7 @@ function Header({cartQuantity}) {
                 <li>
                     <Link to="/cart">
                         <div className="cart">
-                            <div>
+                            <div style={{position: 'relative'}}>
                                 <img className="cart__img" src={process.env.PUBLIC_URL + '/assets/images/cart.png'} alt="shopping cart" />
                                 <span className="cart__tooltip">{cartQuantity}</span>
                             </div>
