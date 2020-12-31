@@ -29,7 +29,7 @@ const App = () => {
     if (found) {
       found.qty++
       cartData[cartData.indexOf(found)] = found
-      setcartData(cartData)
+      setcartData([...cartData])
     } else {
       setcartData([...cartData, { ...data.find(item=>item.id == id), qty: 1 }])
     }
@@ -45,7 +45,7 @@ const App = () => {
       else {
         found.qty--
         cartData[cartData.indexOf(found)] = found
-        setcartData(cartData)
+        setcartData([...cartData])
       }
     }
   }
@@ -63,7 +63,7 @@ const App = () => {
         </Route>
         <Route path="/cart">
           <WithHeader cartQuantity={cartData.length}>
-            <Cart cartItems={cartData} handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveFromCart}/>
+            <Cart cartItems={cartData} handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveFromCart} data={data}/>
           </WithHeader>
         </Route>
         <Route>
