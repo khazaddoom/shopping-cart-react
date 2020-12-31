@@ -10,7 +10,7 @@ const ProductList = ({products, handleAddToCart, cartItems, handleRemoveFromCart
         <div className="grid">
             {
                 products.map(product => {
-                    let found = cartItems.find(item => item.cart_item_id == product.id)
+                    let found = cartItems.find(item => item.id == product.id)
                     product.qty = (found && found.qty) || 0
                     return product
                 })

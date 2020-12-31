@@ -1,9 +1,12 @@
 import React from 'react'
+import Product from './Product'
+let id = 1
 
-function Cart({cartItems}) {
+function Cart({cartItems, handleAddToCart, handleRemoveFromCart}) {
+    console.log(cartItems)
     return (
         <div>
-            { cartItems.map(item => <h1>{ item.cart_item_id + " : " + item.qty }</h1>) }
+            { cartItems.map(product => (<Product key={id++} {...product} handleRemoveFromCart={handleRemoveFromCart} handleAddToCart={handleAddToCart}/>))}
         </div>
     )
 }

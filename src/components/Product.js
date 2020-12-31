@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import './Product.css'
 
 const Product = ({id, title, shortDescription, imageUrl, unitPrice, currencyCode, qty, handleAddToCart, handleRemoveFromCart}) => {
+
     const [productQty, setproductQty] = useState(qty)
 
     const increaseProductQty = e => {
