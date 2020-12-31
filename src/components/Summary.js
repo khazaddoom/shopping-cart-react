@@ -7,10 +7,10 @@ function Summary({cartItems}) {
     return (
         <ul>
             { items.map((item, index) => <li>
-                {index+1}.{item.title} x {item.qty*item.unitPrice}
+                {index+1}. {item.title}  x {item.qty} = {item.qty*item.unitPrice}
             </li>) }
             {
-                <li>Total: {items.reduce((acc, item)=> {
+                <li style={{fontWeight:'bold' }}>Total: {items.reduce((acc, item)=> {
                     return acc + (item.qty*item.unitPrice)
                 }, 0)}</li>
             }
