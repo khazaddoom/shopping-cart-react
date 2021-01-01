@@ -8,8 +8,6 @@ function Cart({ cartItems, handleAddToCart, handleRemoveFromCart }) {
 
     const [itemsInCart, setItemsInCart] = useState([...cartItems])
     useEffect(() => {
-        console.log(cartItems)
-        console.log(itemsInCart)
         setItemsInCart([...cartItems])
     }, [cartItems])
 
