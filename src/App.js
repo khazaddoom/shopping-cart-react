@@ -4,7 +4,10 @@ import ProductList from './components/ProductList';
 import Cart from './components/Cart'
 import WithHeader from './components/WithHeader';
 import NoMatch from './components/NoMatch';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+const firebase = window.firebase
+let firebaseInstance= {}
 
 const data = [{
   id: 101,
@@ -24,6 +27,21 @@ const data = [{
 
 const App = () => {
   const [cartData, setcartData] = useState([])
+
+  useEffect(() => {
+    // Initialize Firebase
+    firebaseInstance = firebase.initializeApp({
+      apiKey: process.env.REACT_APP_apiKey,
+      authDomain: process.env.REACT_APP_authDomain,
+      projectId: process.env.REACT_APP_projectId,
+      storageBucket: process.env.REACT_APP_storageBucket,
+      messagingSenderId: process.env.REACT_APP_messagingSenderId,
+      appId: process.env.REACT_APP_appId
+    })
+
+    console.log(firebaseInstance.name)
+  }, [])
+
   const handleAddToCart = (id) => {
     let found = cartData.find(prod => prod.id == id)
     if (found) {
