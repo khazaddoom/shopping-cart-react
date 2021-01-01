@@ -40,14 +40,15 @@ const App = () => {
     if (found) {
       if (found.qty == 1) {
         setcartData([...cartData.slice(0, cartData.indexOf(found)), ...cartData.slice(cartData.indexOf(found) + 1)])
-        return
       }
       else {
         found.qty--
         cartData[cartData.indexOf(found)] = found
         setcartData([...cartData])
       }
-    }
+    } else {
+        setcartData([])
+      }
   }
 
   return (
