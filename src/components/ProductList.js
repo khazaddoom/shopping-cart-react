@@ -6,6 +6,8 @@ let id = 1
 
 const ProductList = ({products, handleAddToCart, cartItems, handleRemoveFromCart}) => {
 
+    console.log(products)
+
     return (
         <div className="grid">
             {

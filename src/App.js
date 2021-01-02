@@ -4,42 +4,29 @@ import ProductList from './components/ProductList';
 import Cart from './components/Cart'
 import WithHeader from './components/WithHeader';
 import NoMatch from './components/NoMatch';
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import firebaseLibrary from './services/firebaseUtils'
 
 const firebase = window.firebase
-let firebaseInstance= {}
-
-const data = [{
-  id: 101,
-  title: 'ADIDAS', shortDescription: 'Awesome Shoes in Store', imageUrl: '', unitPrice: 12, currencyCode: "$"
-}, {
-  id: 102,
-  title: 'Reebok', shortDescription: 'Awesome Shoes in Store', imageUrl: '', unitPrice: 15, currencyCode: "$"
-}, {
-  id: 103,
-  title: 'Skechers', shortDescription: 'Awesome Shoes in Store', imageUrl: '', unitPrice: 16, currencyCode: "$"
-}, {
-  id: 104,
-  title: 'Nike', shortDescription: 'Awesome Shoes in Store', imageUrl: '', unitPrice: 17, currencyCode: "$"
-},]
-
-
 
 const App = () => {
+  const [data, setData] = useState([])
   const [cartData, setcartData] = useState([])
 
   useEffect(() => {
-    // Initialize Firebase
-    firebaseInstance = firebase.initializeApp({
-      apiKey: process.env.REACT_APP_apiKey,
-      authDomain: process.env.REACT_APP_authDomain,
-      projectId: process.env.REACT_APP_projectId,
-      storageBucket: process.env.REACT_APP_storageBucket,
-      messagingSenderId: process.env.REACT_APP_messagingSenderId,
-      appId: process.env.REACT_APP_appId
-    })
+    const initializeFirebase = async () => {
+      // Initialize Firebase
+      firebaseLibrary.initialize(firebase)
+      const result = await firebaseLibrary.getProducts(firebase)
+      return result
+    };
 
-    console.log(firebaseInstance.name)
+   try {
+    setData(initializeFirebase())
+   } catch (error) {
+     setData([])
+   }
+
   }, [])
 
   const handleAddToCart = (id) => {
