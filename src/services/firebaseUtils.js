@@ -46,7 +46,6 @@ firebaseLibrary.dataLoad = async (firebase) => {
 
 firebaseLibrary.getProducts = async (firebase) => {
     const ref = await firebase.database().ref('products/')
-    console.log(ref)
     const products = await ref.once('value')
     // Firebase Realtime Database stores a product as a Key value pair under the root
     if(products.val())
@@ -56,9 +55,11 @@ firebaseLibrary.getProducts = async (firebase) => {
 
 }
 
-firebaseLibrary.listen = (firebase) => {
-    firebase.database().ref('products/').on('value', (snapshot) => {
-        console.log(snapshot)
+firebaseLibrary.listen = (firebase, callback) => {
+    firebase.database().ref('products/').on('value', (products) => {
+        if(products.val()) {
+            callback(Object.values(products.val()))
+        }
     })
 }
 

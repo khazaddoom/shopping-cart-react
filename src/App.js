@@ -12,14 +12,12 @@ const firebase = window.firebase
 const App = () => {
   const [data, setData] = useState([])
   const [cartData, setcartData] = useState([])
-
   useEffect(() => {
     const initializeFirebase = async () => {
       // Initialize Firebase
       await firebaseLibrary.initialize(firebase)
-      const result = await firebaseLibrary.getProducts(firebase)
-      firebaseLibrary.listen(firebase)
-      setData([...result])
+      await firebaseLibrary.dataLoad(firebase)
+      firebaseLibrary.listen(firebase, setData)
     };
 
    try {
