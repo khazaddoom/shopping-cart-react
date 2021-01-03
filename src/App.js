@@ -16,13 +16,14 @@ const App = () => {
   useEffect(() => {
     const initializeFirebase = async () => {
       // Initialize Firebase
-      firebaseLibrary.initialize(firebase)
+      await firebaseLibrary.initialize(firebase)
       const result = await firebaseLibrary.getProducts(firebase)
-      return result
+      console.log(result)
+      setData([...result])
     };
 
    try {
-    setData(initializeFirebase())
+    initializeFirebase()
    } catch (error) {
      setData([])
    }
