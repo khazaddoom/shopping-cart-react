@@ -18,12 +18,12 @@ const App = () => {
       // Initialize Firebase
       await firebaseLibrary.initialize(firebase)
       const result = await firebaseLibrary.getProducts(firebase)
-      console.log(result)
+      firebaseLibrary.listen(firebase)
       setData([...result])
     };
 
    try {
-    initializeFirebase()
+    initializeFirebase();
    } catch (error) {
      setData([])
    }
