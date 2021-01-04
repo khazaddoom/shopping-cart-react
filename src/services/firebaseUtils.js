@@ -1,7 +1,7 @@
 let firebaseLibrary = [];
 
 const data = [{
-    id: 101,
+    id: Math.random()*100000000000000000,
     title: 'ADIDAS',
     shortDescription: 'Newest Range in Stores', 
     imageUrl: '',
@@ -9,7 +9,7 @@ const data = [{
     currencyCode: '$'
 },
 {
-    id: 102,
+    id: Math.random()*100000000000000000,
     title: 'REEBOK',
     shortDescription: 'Newest Range in Stores', 
     imageUrl: '',

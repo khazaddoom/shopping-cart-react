@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Product from './Product'
 import './Cart.css'
 import Summary from './Summary'
+import { ShoppingCartContext } from '../App'
 let id = 1
 
-function Cart({ cartItems, handleAddToCart, handleRemoveFromCart }) {
+function Cart({ cartItems}) {
 
     const [itemsInCart, setItemsInCart] = useState([...cartItems])
+    const {handleAddToCart, handleRemoveFromCart} = useContext(ShoppingCartContext)
+    
     useEffect(() => {
         setItemsInCart([...cartItems])
     }, [cartItems])
