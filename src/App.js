@@ -19,7 +19,7 @@ const App = () => {
     const initializeFirebase = async () => {
       // Initialize Firebase
       await firebaseLibrary.initialize(firebase)
-      await firebaseLibrary.dataLoad(firebase)
+      // await firebaseLibrary.dataLoad(firebase)
       firebaseLibrary.listen(firebase, setData)
     };
 
