@@ -4,8 +4,7 @@ import './ProductList.css'
 
 let id = 1
 
-const ProductList = ({products, handleAddToCart, cartItems, handleRemoveFromCart}) => {
-
+const ProductList = ({products, cartItems}) => {
     return (
         <div className="grid">
             {
@@ -14,7 +13,7 @@ const ProductList = ({products, handleAddToCart, cartItems, handleRemoveFromCart
                     product.qty = (found && found.qty) || 0
                     return product
                 })
-                .map(product => (<Product key={id++} {...product} handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveFromCart}/>))
+                .map(product => (<Product key={id++} {...product}/>))
             }
             
         </div>

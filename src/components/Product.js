@@ -1,20 +1,23 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import './Product.css'
+import ShoppingCartContext from '../App'
 
-const Product = ({id, title, shortDescription, imageUrl, unitPrice, currencyCode, qty, handleAddToCart, handleRemoveFromCart}) => {
+const Product = ({id, title, shortDescription, imageUrl, unitPrice, currencyCode, qty}) => {
+
+    const shoppingCartContext = useContext(ShoppingCartContext)
 
     const [productQty, setproductQty] = useState(qty)
 
     const increaseProductQty = e => {
         e.preventDefault()
         setproductQty(productQty+1)
-        handleAddToCart(id)
+        shoppingCartContext.handleAddToCart(id)
     }
 
     const decreaseProductQty = e => {
         e.preventDefault()
         setproductQty(productQty-1)
-        handleRemoveFromCart(id)
+        shoppingCartContext.handleRemoveFromCart(id)
     }
 
     return (

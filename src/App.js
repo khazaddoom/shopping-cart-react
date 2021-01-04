@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import ProductList from './components/ProductList';
 import Cart from './components/Cart'
@@ -8,6 +9,11 @@ import { useState, useEffect } from 'react';
 import firebaseLibrary from './services/firebaseUtils'
 
 const firebase = window.firebase
+
+export const ShoppingCartContext = React.createContext({
+  handleAddToCart: () => console.log('Adding...'),
+  handleRemoveFromCart: () => console.log('Removing...')
+})
 
 const App = () => {
   const [data, setData] = useState([])
@@ -56,28 +62,33 @@ const App = () => {
   }
 
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Redirect to="/products" />
-        </Route>
-        <Route path="/products">
-          <WithHeader cartQuantity={cartData.length}>
-            <ProductList products={data} cartItems={cartData} handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveFromCart} />
-          </WithHeader>
-        </Route>
-        <Route path="/cart">
-          <WithHeader cartQuantity={cartData.length}>
-            <Cart cartItems={cartData} handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveFromCart} data={data}/>
-          </WithHeader>
-        </Route>
-        <Route>
-          <WithHeader cartQuantity={cartData.length}>
-            <NoMatch />
-          </WithHeader>
-        </Route>
-      </Switch>
-    </Router>
+    <ShoppingCartContext.Provider value={
+      handleAddToCart,
+      handleRemoveFromCart
+    }>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Redirect to="/products" />
+          </Route>
+          <Route path="/products">
+            <WithHeader cartQuantity={cartData.length}>
+              <ProductList products={data} cartItems={cartData} />
+            </WithHeader>
+          </Route>
+          <Route path="/cart">
+            <WithHeader cartQuantity={cartData.length}>
+              <Cart cartItems={cartData} handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveFromCart} data={data}/>
+            </WithHeader>
+          </Route>
+          <Route>
+            <WithHeader cartQuantity={cartData.length}>
+              <NoMatch />
+            </WithHeader>
+          </Route>
+        </Switch>
+      </Router>
+    </ShoppingCartContext.Provider>
   );
 }
 
