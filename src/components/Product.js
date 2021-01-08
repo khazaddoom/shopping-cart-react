@@ -1,6 +1,8 @@
 import React, {useState, useContext} from 'react'
 import { ShoppingCartContext } from '../App'
 import './Product.css'
+import Button from '@material-ui/core/Button'
+
 
 const Product = ({id, title, shortDescription, imageUrl, unitPrice, currencyCode, qty}) => {
 
@@ -28,7 +30,15 @@ const Product = ({id, title, shortDescription, imageUrl, unitPrice, currencyCode
             </div>
             <div className="info-producto">
                 <div className="price-producto">{currencyCode + unitPrice}</div>
-                {productQty>0? <div><button onClick={decreaseProductQty}> - </button> {productQty} <button onClick={increaseProductQty}> + </button></div> : <a href="" className="button-producto" onClick={increaseProductQty}>Add to Cart</a>}
+                {productQty>0? <div>
+                    <Button variant="contained" color="secondary" onClick={decreaseProductQty} style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}} >-</Button>
+                    <span style={{
+                        fontSize: '1.25rem'
+                    }}> {productQty} </span>
+                    <Button variant="contained" color="primary" onClick={increaseProductQty} style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}}>+</Button>
+                    </div>
+                    : <Button variant="contained" color="primary" onClick={increaseProductQty}  >Add To Cart</Button>
+                }
             </div>
         </div>
     )
