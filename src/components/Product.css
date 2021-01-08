@@ -1,6 +1,7 @@
 .card-producto {
-    padding: 0 1rem;
+    padding: 1rem 1rem;
     text-align: center;
+    margin: 1rem;
 }
 
 .card-producto h1 {
