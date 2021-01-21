@@ -4,32 +4,84 @@ const { GraphQLSchema, GraphQLObjectType, GraphQLList, GraphQLInt, GraphQLString
 
 const app = express()
 
-const UserType = new GraphQLObjectType({
-    name: 'User',
+const InventoryType = new GraphQLObjectType({
+    name: 'Inventory',
+    description: 'An Inventory item',
     fields: () => ({
-        id: GraphQLInt,
-        user_name: GraphQLString
+        id: { type: GraphQLInt},
+        name: {type: GraphQLString},
+        qty: { type: GraphQLInt},
     })
 })
 
-
-// create a schema
-
-const users = new GraphQLSchema({
-    query: new GraphQLObjectType({
-        name: "Users",
-        fields: () => ({
-            message: {
-                type: new GraphQLList(UserType),
-                resolve: () => []
-            }
-        })
+const UserType = new GraphQLObjectType({
+    name: 'User',
+    description: 'A User',
+    fields: () => ({
+        id: { type: GraphQLInt },
+        name: { type: GraphQLString },
+        level: { type: GraphQLInt },
+        inventories: {
+            type: GraphQLList(InventoryType)
+        }
     })
+})
+
+// create a RootQuery Type
+
+const RootQueryType = new GraphQLObjectType({
+    name: "Query",
+    description: "Root Query",
+    fields: () => ({
+        users: {
+            type: GraphQLList(UserType),
+            description: 'List of Books',
+            resolve: () => [{
+                id: 1,
+                name: 'Ganesh',
+                level: 1,
+                inventories: [{
+                    id: 1,
+                    name: 'Coints',
+                    qty: 100
+                }]
+            }, {
+                id: 2,
+                name: 'Saurav',
+                level: 5,
+                inventories: [{
+                    id: 1,
+                    name: 'Coints',
+                    qty: 100
+                }]
+            }, {
+                id: 3,
+                name: 'Avinash',
+                level: 6,
+                inventories: [{
+                    id: 1,
+                    name: 'Coints',
+                    qty: 100
+                }]
+            }]
+        },
+        inventories: {
+            type: GraphQLList(InventoryType),
+            description: 'List of Inventory Items',
+            resolve: () => [{
+            }]
+        }
+    })
+})
+
+// Root Query
+const RootQuery = new GraphQLSchema({
+    query: RootQueryType
 })
 
 
 app.use('/graphql', graphqlHTTP({
-    schema: users,
+    schema: RootQuery,
     graphiql: true
 }))
 
