@@ -4,6 +4,35 @@ const { GraphQLSchema, GraphQLObjectType, GraphQLList, GraphQLInt, GraphQLString
 
 const app = express()
 
+const usersData = [{
+    id: 1,
+    name: 'Ganesh',
+    level: 1,
+    my_inventories: [{
+        id: 1,
+        name: 'Coins',
+        qty: 100
+    }]
+}, {
+    id: 2,
+    name: 'Saurav',
+    level: 5,
+    my_inventories: [{
+        id: 1,
+        name: 'Coins',
+        qty: 100
+    }]
+}, {
+    id: 3,
+    name: 'Avinash',
+    level: 6,
+    my_inventories: [{
+        id: 1,
+        name: 'Coins',
+        qty: 100
+    }]
+}]
+
 const InventoryType = new GraphQLObjectType({
     name: 'Inventory',
     description: 'An Inventory item',
@@ -21,7 +50,7 @@ const UserType = new GraphQLObjectType({
         id: { type: GraphQLInt },
         name: { type: GraphQLString },
         level: { type: GraphQLInt },
-        inventories: {
+        my_inventories: {
             type: GraphQLList(InventoryType)
         }
     })
@@ -33,37 +62,20 @@ const RootQueryType = new GraphQLObjectType({
     name: "Query",
     description: "Root Query",
     fields: () => ({
+        user: {
+            type: UserType,
+            description: 'A single user by ID',
+            args: {
+                id: {
+                    type: GraphQLInt
+                }
+            },
+            resolve: (parent, args) => usersData.find(user => user.id == args.id)
+        },
         users: {
             type: GraphQLList(UserType),
             description: 'List of Books',
-            resolve: () => [{
-                id: 1,
-                name: 'Ganesh',
-                level: 1,
-                inventories: [{
-                    id: 1,
-                    name: 'Coints',
-                    qty: 100
-                }]
-            }, {
-                id: 2,
-                name: 'Saurav',
-                level: 5,
-                inventories: [{
-                    id: 1,
-                    name: 'Coints',
-                    qty: 100
-                }]
-            }, {
-                id: 3,
-                name: 'Avinash',
-                level: 6,
-                inventories: [{
-                    id: 1,
-                    name: 'Coints',
-                    qty: 100
-                }]
-            }]
+            resolve: () => usersData
         },
         inventories: {
             type: GraphQLList(InventoryType),
